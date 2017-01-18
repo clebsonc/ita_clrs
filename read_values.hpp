@@ -2,8 +2,11 @@
 #define ARRAY_OPERATIONS_
 
 #include <iostream>
+#include <vector>
 
 void read_values(int * const array, const int length);
+
+void read_values(std::vector<int> & array, const int length);
 
 void print_array(const int * const array, const int length);
 
