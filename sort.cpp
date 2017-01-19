@@ -12,7 +12,6 @@ void  Sort::insertion_sort(int * const vet, const int length){
   }
 }
 
-
 void Sort::insertion_sort_decreasing(int * const vet, const int length){
   for(int i = (length-2); i >= 0; i--){
     int key = vet[i];
@@ -24,6 +23,39 @@ void Sort::insertion_sort_decreasing(int * const vet, const int length){
     vet[j-1] = key;
   }
 }
+
+
+void Sort::recursive_insertion_sort(int * const array, const int length){
+  if(length==1){
+    return;
+  }
+  recursive_insertion_sort(array, length-1);
+  int key = array[length-1];
+  int j = length - 2;
+  while(j>=0 && array[j]>key){
+    array[j+1] = array[j];
+    j--;
+  }
+  array[j+1] = key;
+}
+
+
+
+void Sort::selection_sort(int * const array, const int length){
+  int k=0;
+  for(int i=0; i< length-2; i++){
+    k = i;
+    for(int j=i+1; j<length; j++){
+      if(array[j] < array[k]){
+        k=j;
+      }
+    }
+    int temp = array[i];
+    array[i] = array[k];
+    array[k] = temp;
+  }
+}
+
 
 void Sort::merge_sort(int * const array, const int lindex, const int rindex){
   if(lindex < rindex){

@@ -11,6 +11,12 @@ class Sort{
     static void insertion_sort_decreasing(int * const vet, 
       const int length);
 
+    static void recursive_insertion_sort(int * const array,
+      const int length);
+
+    static void selection_sort(int * const array, 
+      const int length);
+
     static void combine(int * const array, 
       const int lindex, 
       const int middle, 
