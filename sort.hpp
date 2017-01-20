@@ -5,10 +5,13 @@
 
 class Sort{
   public:
-    static void insertion_sort(int * const vet, 
+    static void bubble_sort(int * const array, 
+      const int lenght);
+
+    static void insertion_sort(int * const array, 
        const int length);
 
-    static void insertion_sort_decreasing(int * const vet, 
+    static void insertion_sort_decreasing(int * const array, 
       const int length);
 
     static void recursive_insertion_sort(int * const array,

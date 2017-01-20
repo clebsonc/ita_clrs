@@ -1,26 +1,41 @@
 #include "sort.hpp"
 
-void  Sort::insertion_sort(int * const vet, const int length){
-  for(int i  = 1; i<length; i++){
-    int key = vet[i];
-    int j = i - 1;
-    while(j >= 0 && vet[j] > key){
-      vet[j+1] = vet[j];
-      j--;
+void Sort::bubble_sort(int * const array, const int length){
+  int temp = 0;
+  for(int i = 0; i<length-1; i++){
+    for(int j = length-1; j>i; j--){
+      if(array[j] < array[j-1]){
+        temp = array[j];
+        array[j] = array[j-1];
+        array[j-1] = temp;
+      }
     }
-    vet[j+1] = key;
   }
 }
 
-void Sort::insertion_sort_decreasing(int * const vet, const int length){
+
+void  Sort::insertion_sort(int * const array, const int length){
+  for(int i  = 1; i<length; i++){
+    int key = array[i];
+    int j = i - 1;
+    while(j >= 0 && array[j] > key){
+      array[j+1] = array[j];
+      j--;
+    }
+    array[j+1] = key;
+  }
+}
+
+
+void Sort::insertion_sort_decreasing(int * const array, const int length){
   for(int i = (length-2); i >= 0; i--){
-    int key = vet[i];
+    int key = array[i];
     int j = i + 1;
-    while(j <= (length-1) && vet[j] > key){
-      vet[j-1] = vet[j];
+    while(j <= (length-1) && array[j] > key){
+      array[j-1] = array[j];
       j++;
     }
-    vet[j-1] = key;
+    array[j-1] = key;
   }
 }
 
@@ -38,7 +53,6 @@ void Sort::recursive_insertion_sort(int * const array, const int length){
   }
   array[j+1] = key;
 }
-
 
 
 void Sort::selection_sort(int * const array, const int length){
