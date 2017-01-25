@@ -22,6 +22,13 @@ void print_array(const int * const array, const int length){
   std::cout << std::endl;
 }
 
+void print_array(const std::vector<int> & array){
+  for(int i : array){
+    std::cout << i << " ";
+  }
+  std::cout << std::endl;
+}
+
 
 void copy_array_values(const int * const primary_array, int * const secondary_array, 
   const int lindex, const int rindex){
