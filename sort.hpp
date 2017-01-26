@@ -12,7 +12,9 @@ class Sort{
       const int size,
       const int index);
 
-    
+    static void build_max_heapify(int * const array, int size);
+
+    static void heap_sort(int * const array, int size);
     
     static void bubble_sort(int * const array, 
       const int lenght);

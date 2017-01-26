@@ -25,10 +25,29 @@ const int index){
     if(larger != i){
       swap(array, i, larger);
       i = larger;
+    } else{
+      break;
     }
   }
 }
 
+
+void Sort::build_max_heapify(int * const array, int size){
+  for(int i = (size/2-1); i>=0; i--){
+    max_heapify_iterative(array, size, i);
+  }
+}
+
+
+void Sort::heap_sort(int * const array, const int size){
+  build_max_heapify(array, size);
+  int modified_index = size;
+  for(int i = modified_index-1; i>=1; i--){
+    swap(array, 0, i);
+    modified_index--;
+    max_heapify_iterative(array, modified_index, 0);
+  }
+}
 
 
 void Sort::bubble_sort(int * const array, const int length){

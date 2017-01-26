@@ -20,26 +20,10 @@ int main(){
   }
 
   read_values(array, length);
-  //Sort::bubble_sort(array, length);
-  int index;
-  std::cout << "heapify index: ";
-  std::cin >> index;
+  Sort::heap_sort(array, length);
   print_array(array, length);
-  Sort::max_heapify_iterative(array, length, index);
-  print_array(array, length);
-
   
-  //int q;
-  //std::cout << "search for: ";
-  //std::cin  >> q;
-  //int s = Search::binary_search(array, length, q);
-  //std::cout << " " << s << " " << std::endl;
-  //if(s>=0)
-  //  std::cout << "i: " << s << " " << array[s] << std::endl;
-  //else
-  //  std::cout << "Element not found" << std::endl;
-
-    
+  
   delete[] array;
 
   return 0;
