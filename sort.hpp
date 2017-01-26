@@ -4,7 +4,16 @@
 #include "read_values.hpp"
 
 class Sort{
+  private:
+    void static swap(int * const array, const int index1, const int index2);
+
   public:
+    static void max_heapify_iterative(int * const array,
+      const int size,
+      const int index);
+
+    
+    
     static void bubble_sort(int * const array, 
       const int lenght);
 

@@ -1,5 +1,36 @@
 #include "sort.hpp"
 
+void Sort::swap(int * const array, const int index1, const int index2){
+  int temp = array[index1];
+  array[index1] = array[index2];
+  array[index2] = temp;
+}
+
+void Sort::max_heapify_iterative(int * const array, const int size, 
+const int index){
+  int left = 0;
+  int right = 0;
+  int larger = 0;
+  int i = index;
+  while(i<size/2){
+    left = 2*i+1;
+    right = 2*i+2;
+    larger = i;
+    if(left < size && array[larger] < array[left]){
+      larger = left;
+    }
+    if(right < size && array[larger] < array[right]){
+      larger = right;
+    }
+    if(larger != i){
+      swap(array, i, larger);
+      i = larger;
+    }
+  }
+}
+
+
+
 void Sort::bubble_sort(int * const array, const int length){
   int temp = 0;
   for(int i = 0; i<length-1; i++){
