@@ -12,9 +12,17 @@ class Sort{
       const int size,
       const int index);
 
-    static void build_max_heapify(int * const array, int size);
+    static void min_heapify_iterative(int * const array,
+      const int size,
+      const int index);
 
-    static void heap_sort(int * const array, int size);
+    static void build_min_heap(int * const array, int size);
+
+    static void build_max_heap(int * const array, int size);
+
+    static void heap_sort_max(int * const array, int size);
+
+    static void heap_sort_min(int * const array, int size);
     
     static void bubble_sort(int * const array, 
       const int lenght);

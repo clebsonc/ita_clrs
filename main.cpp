@@ -2,6 +2,7 @@
 #include <new>
 #include <cstdlib>
 #include <exception>
+#include <climits>
 
 #include "read_values.hpp"
 #include "sort.hpp"
@@ -20,7 +21,7 @@ int main(){
   }
 
   read_values(array, length);
-  Sort::heap_sort(array, length);
+  Sort::heap_sort_min(array, length);
   print_array(array, length);
   
   

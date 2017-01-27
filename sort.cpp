@@ -32,15 +32,55 @@ const int index){
 }
 
 
-void Sort::build_max_heapify(int * const array, int size){
+void Sort::min_heapify_iterative(int * const array, const int size,
+const int index){
+  int left = 0;
+  int right = 0;
+  int smaller = index;
+  int i = index;
+  while(i < size/2){
+    smaller = i;
+    left = 2*i+1;
+    right = 2*i+2;
+    if(left < size && array[left] < array[smaller])
+      smaller = left;
+    if(right < size && array[right] < array[smaller])
+      smaller = right;
+    if(i!=smaller){
+      swap(array, i, smaller);
+      i = smaller;
+    } else{
+      break;
+    }
+  }
+}
+
+
+void Sort::build_min_heap(int * const array, int size){
+  for(int i = size/2-1; i>=0; i--){
+    min_heapify_iterative(array, size, i);
+  }
+}
+
+void Sort::build_max_heap(int * const array, int size){
   for(int i = (size/2-1); i>=0; i--){
     max_heapify_iterative(array, size, i);
   }
 }
 
 
-void Sort::heap_sort(int * const array, const int size){
-  build_max_heapify(array, size);
+void Sort::heap_sort_min(int * const array, const int size){
+  build_min_heap(array, size);
+  int index = size;
+  for(int i = size-1; i>=1; i--){
+    swap(array, 0, i);
+    index--;
+    min_heapify_iterative(array, index, 0);
+  }
+}
+
+void Sort::heap_sort_max(int * const array, const int size){
+  build_max_heap(array, size);
   int modified_index = size;
   for(int i = modified_index-1; i>=1; i--){
     swap(array, 0, i);
