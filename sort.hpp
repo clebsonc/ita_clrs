@@ -7,6 +7,7 @@ class Sort{
   private:
     void static swap(int * const array, const int index1, const int index2);
 
+
   public:
     static void max_heapify_iterative(int * const array,
       const int size,
@@ -46,6 +47,12 @@ class Sort{
 
     static void merge_sort(int * const array, 
       const int lindex, 
+      const int rindex);
+    
+    static int median_of_three(const int a, const int b, const int c);
+
+    static void quick_sort(int * const array,
+      const int lindex,
       const int rindex);
 };
 

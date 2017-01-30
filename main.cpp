@@ -20,13 +20,13 @@ int main(){
     std::exit(EXIT_FAILURE);
   }
 
+
   read_values(array, length);
-  Sort::heap_sort_min(array, length);
+  Sort::quick_sort(array, 0, length-1);
   print_array(array, length);
   
   
   delete[] array;
-
   return 0;
 }
 

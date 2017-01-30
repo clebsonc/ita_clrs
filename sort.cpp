@@ -220,3 +220,35 @@ void Sort::combine(int * const array,
   delete[] right;
 }
 
+
+int Sort::median_of_three(const int a, const int b, const int c){
+  int m = 0;
+  if(a < b && a < c)
+    m = (b < c ? b : c);
+  else if(b < a && b < c)
+    m = (a < c ? a : c);
+  else
+    m = (a < b ? a : b);
+  return m;
+}
+
+
+void Sort::quick_sort(int * array, const int lindex, const int rindex){
+  if(lindex < rindex){
+    int m = array[(lindex+rindex)/2];
+    int pivot = median_of_three(array[lindex], m, array[rindex]);
+    int i = lindex;
+    int j = rindex;
+    while(i < j){
+      while(i < j && array[i] < pivot)
+        i++;
+      while(i < j && array[j] > pivot)
+        j--;
+      if(i < j)
+        Sort::swap(array, i, j);
+    }
+    quick_sort(array, lindex, i-1);
+    quick_sort(array, j+1, rindex);
+  }
+}
+
