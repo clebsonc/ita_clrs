@@ -4,34 +4,26 @@
 #include <exception>
 #include <climits>
 
-#include "queue_array.hpp"
-
+#include "linked_list.hpp"
 
 
 int main(){
-  QueueArray qa(6);
+  LinkedList a;
+  a.insert(10);
+  a.insert(20);
+  a.insert(30);
+
+  ListNode * b = a.search(20);
+  std::cout << "s: " << (*b).getVal() << " " << (*(*b).getNext()).getVal() << 
+    " " << (*(*b).getPrev()).getVal() << std::endl;
+  a.remove(50);
+  a.remove(20);
+  a.remove(10);
+  a.remove(30);
   
-  qa.enqueue(10);
-  qa.enqueue(20);
-  qa.enqueue(30);
-  qa.enqueue(40);
-  qa.enqueue(50);
-  qa.enqueue(60);
+  a.remove(40);
 
-
-  int b = 0;
-  qa.dequeue(b);
-  std::cout << b << std::endl;
-  qa.dequeue(b);
-  std::cout << b << std::endl;
-  qa.dequeue(b);
-  std::cout << b << std::endl;
-
-  qa.enqueue(70);
-
-  std::cout << qa.getBegin() << " " << qa.getEnd() << std::endl;
-  std::cout << qa.getSize() << std::endl;
-
+  a.listElements();
   return 0;
 }
 
