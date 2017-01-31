@@ -252,3 +252,37 @@ void Sort::quick_sort(int * array, const int lindex, const int rindex){
   }
 }
 
+
+void Sort::build_array(int * & array, const int size){
+  try{
+    array = new int[size];
+  } catch(const std::bad_alloc & ba){
+    std::cerr << "Error allocating memory: " << ba.what() << std::endl;
+    std::exit(EXIT_FAILURE);
+  }
+}
+
+
+void Sort::counting_sort(int * & array, const int size, const int k){
+  std::vector<int> carray(k+1, 0);
+
+  for(int i = 0; i<size; i++){
+    carray.at(array[i])++;
+  }
+  for(int i = 1; i<=k; i++){
+    carray.at(i) = carray.at(i)+carray.at(i-1);
+  }
+  
+  int * barray = nullptr;
+  build_array(barray, size);
+  int aindex = 0, qindex = 0;
+  for(int j = size-1; j>= 0; j--){
+    aindex = array[j];
+    qindex = carray[aindex]-1;
+    barray[qindex] = array[j];
+    carray[aindex] = carray[aindex]-1;
+  }
+
+  delete[] array;
+  array = barray;
+}

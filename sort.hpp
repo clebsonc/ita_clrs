@@ -1,12 +1,18 @@
 #ifndef SORT_HPP_
 #define SORT_HPP_
 
+#include <vector>
+#include <exception>
+#include <new>
+#include <cstdlib> 
+
 #include "read_values.hpp"
 
 class Sort{
   private:
     void static swap(int * const array, const int index1, const int index2);
-
+  
+    void static build_array(int * & array, const int size);
 
   public:
     static void max_heapify_iterative(int * const array,
@@ -49,11 +55,17 @@ class Sort{
       const int lindex, 
       const int rindex);
     
-    static int median_of_three(const int a, const int b, const int c);
+    static int median_of_three(const int a, 
+      const int b, 
+      const int c);
 
     static void quick_sort(int * const array,
       const int lindex,
       const int rindex);
+
+    static void counting_sort(int * & array, 
+      const int size, 
+      const int k);
 };
 
 #endif 
