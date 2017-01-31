@@ -4,29 +4,34 @@
 #include <exception>
 #include <climits>
 
-#include "read_values.hpp"
-#include "sort.hpp"
-#include "search.hpp"
+#include "queue_array.hpp"
+
+
 
 int main(){
-  int length=0;
-  std::cin >> length;
-  int *array = nullptr;
-
-  try{
-    array = new int[length];
-  } catch(const std::bad_alloc & ba){
-    std::cout << "Error allocating memory.\n" << ba.what();
-    std::exit(EXIT_FAILURE);
-  }
-
-
-  read_values(array, length);
-  Sort::counting_sort(array, length, 5);
-  print_array(array, length);
+  QueueArray qa(6);
   
-  
-  delete[] array;
+  qa.enqueue(10);
+  qa.enqueue(20);
+  qa.enqueue(30);
+  qa.enqueue(40);
+  qa.enqueue(50);
+  qa.enqueue(60);
+
+
+  int b = 0;
+  qa.dequeue(b);
+  std::cout << b << std::endl;
+  qa.dequeue(b);
+  std::cout << b << std::endl;
+  qa.dequeue(b);
+  std::cout << b << std::endl;
+
+  qa.enqueue(70);
+
+  std::cout << qa.getBegin() << " " << qa.getEnd() << std::endl;
+  std::cout << qa.getSize() << std::endl;
+
   return 0;
 }
 
