@@ -22,7 +22,7 @@ int main(){
 
 
   read_values(array, length);
-  Sort::quick_sort(array, 0, length-1);
+  Sort::counting_sort(array, length, 5);
   print_array(array, length);
   
   
