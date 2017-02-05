@@ -13,17 +13,17 @@
 
 
 class Graph{
-private:
-std::unordered_map<GraphNode, std::vector<std::string>, GraphHash> adj_list;
+  private:
+    std::unordered_map<GraphNode, std::vector<std::string>, GraphHash> adj_list;
 
   public:
     Graph();
-    
- void insertNode(const std::string & node_name);
 
-    
+    void insertNode(const std::string & node_name);
+
+
     void insertEdge(const GraphNode & node1,
-                    const GraphNode & node2);
+        const GraphNode & node2);
 
     void print_graph_adj_list() const;
 
