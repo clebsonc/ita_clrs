@@ -16,6 +16,7 @@ class GraphNode{
 
   public:
     // Constructors
+    int test;
     GraphNode();
     GraphNode(std::string name);
     

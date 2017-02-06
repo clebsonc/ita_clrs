@@ -4,26 +4,46 @@
 #include <exception>
 #include <climits>
 
-#include "linked_list.hpp"
+#include "adjacency_list.hpp"
 
 
 int main(){
-  LinkedList a;
-  a.insert(10);
-  a.insert(20);
-  a.insert(30);
+  Graph g;
+  g.insertNode("r");
+  g.insertNode("s");
+  g.insertNode("t");
+  g.insertNode("u");
+  g.insertNode("v");
+  g.insertNode("w");
+  g.insertNode("x");
+  g.insertNode("y");
 
-  ListNode * b = a.search(20);
-  std::cout << "s: " << (*b).getVal() << " " << (*(*b).getNext()).getVal() << 
-    " " << (*(*b).getPrev()).getVal() << std::endl;
-  a.remove(50);
-  a.remove(20);
-  a.remove(10);
-  a.remove(30);
-  
-  a.remove(40);
+  g.insertEdge("r", "s");
+  g.insertEdge("s", "r");
+  g.insertEdge("r", "v");
+  g.insertEdge("v", "r");
+  g.insertEdge("s", "w");
+  g.insertEdge("w", "s");
+  g.insertEdge("w", "t");
+  g.insertEdge("t", "w");
+  g.insertEdge("w", "x");
+  g.insertEdge("x", "w");
+  g.insertEdge("t", "x");
+  g.insertEdge("x", "t");
+  g.insertEdge("t", "u");
+  g.insertEdge("u", "t");
+  g.insertEdge("x", "u");
+  g.insertEdge("u", "x");
+  g.insertEdge("x", "y");
+  g.insertEdge("y", "x");
+  g.insertEdge("u", "y");
+  g.insertEdge("y", "u");
 
-  a.listElements();
+  g.breadth_first_search("s");
+  g.print_graph_adj_list();
+  g.print_path_BFS("s", "y");
+  std::cout << "\n";
+
   return 0;
 }
 

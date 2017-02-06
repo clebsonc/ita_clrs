@@ -11,26 +11,28 @@
 #include "graph_hash.hpp"
 #include "color.hpp"
 
-
 class Graph{
   private:
-    std::unordered_map<GraphNode, std::vector<std::string>, GraphHash> adj_list;
+    using umap = std::unordered_map<std::string,
+      std::pair<GraphNode, std::vector<std::string> > >;
+
+    umap adj_list;
 
   public:
+
     Graph();
 
     void insertNode(const std::string & node_name);
 
-
-    void insertEdge(const GraphNode & node1,
-        const GraphNode & node2);
+    void insertEdge(const std::string & node1, const std::string & node2);
 
     void print_graph_adj_list() const;
 
+    void breadth_first_search(std::string source);
+
+    void print_path_BFS(std::string source, std::string destine);
+
 };
 
-
-
-
-
 #endif
+
