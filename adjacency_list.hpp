@@ -26,11 +26,15 @@ class Graph{
 
     void insertEdge(const std::string & node1, const std::string & node2);
 
-    void print_graph_adj_list() const;
-
     void breadth_first_search(std::string source);
 
-    void print_path_BFS(std::string source, std::string destine);
+    void depth_first_search();
+
+    void depth_first_search_visit(umap::iterator & it, int & time);
+
+    void print_path(std::string source, std::string destine) const;
+    
+    void print_graph_adj_list() const;
 
 };
 
