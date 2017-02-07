@@ -4,6 +4,7 @@
 #include <exception>
 #include <climits>
 #include <string>
+#include <list>
 
 #include "adjacency_list.hpp"
 
@@ -31,12 +32,11 @@ int main(){
   read_graph(g);
 
   g.print_graph_adj_list();
-  g.depth_first_search();
-  std::string s, d;
-  std::cin >> s;
-  std::cin  >> d;
-  g.print_path(s, d);
   std::cout << "\n";
+  
+  g.print_strongly_connected_component();
+
+  std::cout<< std::endl;
 
   return 0;
 }

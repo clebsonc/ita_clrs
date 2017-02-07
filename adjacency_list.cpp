@@ -95,6 +95,73 @@ void Graph::depth_first_search_visit(umap::iterator & it, int & time){
 }
 
 
+std::list<std::string> Graph::depth_first_search_list(){
+  for(umap::iterator it = adj_list.begin(); it!=adj_list.end(); it++){
+    it->second.first.setColor(Color::WHITE);
+    it->second.first.setPredecessor("");
+  }
+  int time = 0;
+  std::list<std::string> list;
+  for(umap::iterator it = adj_list.begin(); it!=adj_list.end(); it++){
+    if(it->second.first.getColor() == Color::WHITE){
+      depth_first_search_visit_list(it, list, time);
+    }
+  }
+  return list;
+}
+
+
+void Graph::depth_first_search_visit_list(umap::iterator & it, 
+  std::list<std::string> & list,  int & time){
+  time++;
+  it->second.first.setDiscoveredTime(time);
+  it->second.first.setColor(Color::GRAY);
+  for(std::string s : it->second.second){
+    umap::iterator v = adj_list.find(s);
+    if(v->second.first.getColor() == Color::WHITE){
+      v->second.first.setPredecessor(it->first);
+      depth_first_search_visit_list(v, list, time);
+    }
+  }
+  time++;
+  it->second.first.setFinishedTime(time);
+  list.emplace_front(it->first);
+}
+
+std::list<GraphNode> Graph::topological_sort(){
+  for(umap::iterator it = adj_list.begin(); it != adj_list.end(); it++){
+    it->second.first.setColor(Color::WHITE);
+    it->second.first.setPredecessor("");
+  }
+  int time=0;
+  std::list<GraphNode> list;
+  for(umap::iterator it = adj_list.begin(); it != adj_list.end(); it++){
+    if(it->second.first.getColor() == Color::WHITE){
+      topological_sort_visit(it, list, time);
+    }
+  }
+  return list;
+}
+
+
+void Graph::topological_sort_visit(umap::iterator & it, 
+  std::list<GraphNode> & list, int & time){
+  time = time + 1;
+  it->second.first.setColor(Color::GRAY);
+  it->second.first.setDiscoveredTime(time);
+  for(std::string s : it->second.second){
+    umap::iterator v = adj_list.find(s);
+    if(v->second.first.getColor() == Color::WHITE){
+      v->second.first.setPredecessor(it->first);
+      topological_sort_visit(v, list, time);
+    }
+  }
+  time++;
+  it->second.first.setFinishedTime(time);
+  list.emplace_front(it->second.first);
+  it->second.first.setColor(Color::BLACK);
+}
+
 void Graph::print_path(std::string source, std::string destine) const{
   if(source == destine)
     std::cout << source << " - ";
@@ -121,5 +188,66 @@ void Graph::print_graph_adj_list() const{
     }
     std::cout << "\n";
   }
+}
+
+
+Graph Graph::transpose(){
+  Graph gt;
+  for(umap::iterator it = adj_list.begin(); it!=adj_list.end(); it++){
+    gt.insertNode(it->first);
+  }
+  for(umap::iterator it = adj_list.begin(); it!= adj_list.end(); it++){
+    for(std::string s : it->second.second){
+      gt.insertEdge(s, it->first);
+    }
+  }
+  return gt;
+}
+
+
+void Graph::print_strongly_connected_component(){
+  std::list<std::string> preference = depth_first_search_list();
+  Graph gt = this->transpose();
+  gt.depth_first_search(preference);
+}
+
+
+void Graph::depth_first_search(std::list<std::string> & preference){
+  for(umap::iterator it = adj_list.begin(); it!= adj_list.end(); it++){
+    it->second.first.setColor(Color::WHITE);
+    it->second.first.setPredecessor("");
+  }
+  int time = 0;
+  int count = 1;
+  while(!preference.empty()){
+    umap::iterator it = adj_list.find(preference.front());
+    preference.pop_front();
+    std::cout << "Component " << count << ": ";
+    if(it->second.first.getColor() == Color::WHITE){
+      depth_first_search_visit(it, preference, time);
+    }
+    std::cout << "\n";
+    count++;
+  }
+}
+
+
+void Graph::depth_first_search_visit(umap::iterator & it, 
+      std::list<std::string> & preference, int & time){
+  time++;
+  it->second.first.setColor(Color::GRAY);
+  it->second.first.setDiscoveredTime(time);
+  for(std::string s : it->second.second){
+    preference.remove(s);
+    umap::iterator v = adj_list.find(s);
+    if(v->second.first.getColor() == Color::WHITE){
+      v->second.first.setPredecessor(it->first);
+      depth_first_search_visit(v, preference, time);
+    }
+  }
+  std::cout << it->first << "_";
+  time++;
+  it->second.first.setFinishedTime(time);
+  it->second.first.setColor(Color::BLACK);
 }
 
