@@ -1,0 +1,30 @@
+void Graph::breadth_first_search(const std::string & source){
+  using umap = std::unordered_map<std::string, NodeGraph>;
+  umap::iterator it = adj_list.begin();
+  while(it != adj_list.end()){
+    it->second.clearPredecessor();
+    it->second.setDiscovered(INT_MAX);
+    it++;
+  }
+  it = adj_list.find(source);
+  it->second.setDiscovered(0);
+  it->second.setColor(Color::kGray);
+  std::queue<umap::iterator> queue;
+  queue.emplace(it);
+
+  while(!queue.empty()){
+    it = queue.front();
+    queue.pop();
+    for(Edge e : it->second.getNeighbors()){
+      umap::iterator v = adj_list.find(e.getDestine());
+      if(v->second.getColor() == Color::kWhite){
+        v->second.setColor(Color::kGray);
+        v->second.setDiscovered(it->second.getDiscovered() + 1);
+        queue.emplace(v);
+      }
+      v->second.addPredecessor(it->first);
+    }
+    it->second.setColor(Color::kBlack);
+  }
+}
+
